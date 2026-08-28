@@ -1,0 +1,12 @@
+# libFuzzer/AFL++ dictionary for the MFERF format.
+# Magic and record type bytes, so the mutator reaches the record handlers.
+magic="MFR1"
+type_string="\x01"
+type_blob="\x02"
+type_index="\x03"
+type_recycle="\x04"
+type_container="\x10"
+len_max="\xff\xff\xff\xff"
+len_wrap="\xff\xff\xff\xfe"
+len_32="\x00\x00\x00\x20"
+count_one="\x00\x01"
