@@ -1,0 +1,64 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    # Correctness gate. On Linux the ASan runtime runs, so the full suite
+    # (triage, detect, the MFERF ASan regressions, the HTTP differential) runs
+    # for real — unlike the dev Mac, where ASan binaries are skipped.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake
+          python -m pip install --upgrade pip pytest
+      - name: Regenerate reproducers (MFERF-005 is large)
+        run: python scripts/mferf_pack.py --seeds corpus/mferf --repro tests/mferf/reproducers
+      - name: pytest (ASan runs here)
+        env:
+          CC: clang
+          ASAN_OPTIONS: abort_on_error=1:detect_leaks=0
+        run: python -m pytest -q tests
+
+  campaign:
+    # Real libFuzzer campaign + triage, and the structure-aware head-to-head.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake
+          python -m pip install --upgrade pip
+      - name: Configure (libFuzzer engine)
+        run: cmake -S . -B build -DTRIAGE_ENGINE=libfuzzer
+      - name: Build in-repo targets
+        run: cmake --build build --target mferf_fuzz mferf_fuzz_patched
+      - name: Smoke — reproduce each planted bug under the real engine
+        env:
+          ASAN_OPTIONS: abort_on_error=1:detect_leaks=0
+        run: |
+          for f in tests/mferf/reproducers/crash-MFERF-00{1,2,3,4}; do
+            echo "== $f =="; ./build/mferf_fuzz "$f" && { echo "FAIL: no crash"; exit 1; } || true
+          done
+      - name: libFuzzer campaign + triage
+        run: bash scripts/run_campaign.sh build/mferf_fuzz corpus/mferf 45
+      - name: Structure-aware head-to-head (short)
+        run: bash scripts/compare_mutators.sh 100000 1 || true
+      - name: Upload triage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: triage-report
+          path: campaigns/**/triage.*
