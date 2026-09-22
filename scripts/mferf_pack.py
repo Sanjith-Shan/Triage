@@ -51,14 +51,16 @@ def repro_001() -> bytes:
 
 
 def repro_002() -> bytes:
-    # BLOB declares length 0xFFFFFFFF -> cap wraps to 0 (uint32) -> malloc(0) ->
-    # memcpy of the 32 real value bytes overflows the heap chunk.
-    return mferf(rec_hdr(0x02, 0xFFFFFFFF, b"B" * 32), count=1)
+    # BLOB declares length 0xFFFF -> cap truncates to uint16 and wraps to 0 ->
+    # malloc(0) -> the 32-byte copy overflows the heap chunk.
+    return mferf(rec_hdr(0x02, 0xFFFF, b"B" * 32), count=1)
 
 
 def repro_003() -> bytes:
-    # INDEX: u32 index = 0x00100000, then 4 data bytes -> data[index] OOB read.
-    value = struct.pack(">I", 0x00100000) + b"data"
+    # INDEX: u32 index = 64, then 64 data bytes -> data[64] is one past the end,
+    # landing in ASan's right redzone: a clean heap-buffer-overflow READ (not a
+    # far-out SEGV).
+    value = struct.pack(">I", 64) + b"D" * 64
     return mferf(rec(0x03, value), count=1)
 
 

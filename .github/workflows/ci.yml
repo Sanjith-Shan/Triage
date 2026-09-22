@@ -31,6 +31,9 @@ jobs:
   campaign:
     # Real libFuzzer campaign + triage, and the structure-aware head-to-head.
     runs-on: ubuntu-latest
+    env:
+      CC: clang
+      CXX: clang++
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

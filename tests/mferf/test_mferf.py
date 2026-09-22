@@ -73,11 +73,20 @@ def test_benign_seeds_parse_clean(builds):
         assert p.returncode == 0, f"{seed} should parse cleanly, got {p.returncode}"
 
 
+def _run_small_stack(binary, arg, kb=2048, timeout=30):
+    """Run under a reduced stack so the recursion overflows regardless of the
+    platform's default (Linux's 8 MB would otherwise need a much deeper input)."""
+    import subprocess
+    return subprocess.run(
+        ["bash", "-c", f'ulimit -s {kb}; exec "$0" "$1"', str(binary), str(arg)],
+        capture_output=True, timeout=timeout)
+
+
 def test_recursion_bug_is_real_and_fixed_plainly(builds):
     # MFERF-005 faults on its own (no sanitizer needed): unbounded recursion.
-    vuln = run(builds["vuln_plain"], REPRO / "crash-MFERF-005", timeout=30)
+    vuln = _run_small_stack(builds["vuln_plain"], REPRO / "crash-MFERF-005")
     assert vuln.returncode != 0, "unbounded recursion must crash the unpatched build"
-    patched = run(builds["patched_plain"], REPRO / "crash-MFERF-005", timeout=30)
+    patched = _run_small_stack(builds["patched_plain"], REPRO / "crash-MFERF-005")
     assert patched.returncode == 0, "depth limit must fix MFERF-005"
 
 

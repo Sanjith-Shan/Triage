@@ -50,26 +50,26 @@ static int rec_string(cur_t *c, uint32_t length) {
 }
 
 /* ---- type 0x02 BLOB ---- MFERF-002 heap-buffer-overflow via int overflow ---- */
+static volatile uint8_t g_blob_sink; /* observable: defeats dead-code elimination */
+
 static int rec_blob(cur_t *c, uint32_t length) {
   size_t avail = c->len - c->pos;
-  size_t take = length < avail ? length : avail;
+  size_t nbytes = length < avail ? length : avail; /* bytes we will copy */
 #ifdef MFERF_PATCHED
-  size_t cap = (size_t)length + 1; /* size_t: no 32-bit wrap */
-  uint8_t *p = (uint8_t *)malloc(cap);
-  if (!p) return -1;
-  memcpy(p, c->buf + c->pos, take);
-  p[take] = 0;
+  size_t cap = (size_t)length + 1; /* honest width: a 0xFFFF length -> 64 KiB */
 #else
-  /* BUG MFERF-002: cap computed in uint32_t. length = 0xFFFFFFFF wraps cap to 0,
-   * malloc(0) returns a minimal chunk, memcpy of `take` bytes overflows it.
-   * CWE-190 -> CWE-122. */
-  uint32_t cap = length + 1;
+  /* BUG MFERF-002: the capacity is truncated to 16 bits, so a length whose low
+   * 16 bits are 0xFFFF wraps cap to 0. malloc(0) returns a minimal chunk and the
+   * copy below overflows it. CWE-190 -> CWE-122. */
+  uint16_t cap = (uint16_t)length + 1;
+#endif
   uint8_t *p = (uint8_t *)malloc(cap);
   if (!p) return -1;
-  memcpy(p, c->buf + c->pos, take);
-#endif
+  for (size_t i = 0; i < nbytes; i++)     /* byte copy, not memcpy: never elided */
+    p[i] = c->buf[c->pos + i];            /* OOB write once i >= cap */
+  g_blob_sink += p[0];                     /* observable read -> keeps the alloc live */
   free(p);
-  c->pos += take;
+  c->pos += nbytes;
   return 0;
 }
 
