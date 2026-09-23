@@ -43,11 +43,11 @@ build-plain/mferf_fuzz --reach 100000 --seeds corpus/mferf --mutator {naive|stru
 
 | Seed | naive | structure-aware | ratio |
 |---|---|---|---|
-| 1 | 91 | 1,335 | 14.7× |
+| 1 | 121 | 1,335 | 11.0× |
 | 2 | 118 | 1,366 | 11.6× |
 | 3 | 124 | 1,247 | 10.1× |
 
-The structure-aware mutator finds **~10–15× more crashes** at equal budget, because it drives
+The structure-aware mutator finds **~10–12× more crashes** at equal budget, because it drives
 length fields to the integer boundaries (`0xFFFFFFFF`, 32, 64, …) and flips record types
 straight into the vulnerable handlers, where naive byte-flipping mostly nibbles at bytes that
 don't matter.

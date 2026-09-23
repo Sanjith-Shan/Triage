@@ -58,7 +58,7 @@ jobs:
       - name: libFuzzer campaign + triage
         run: bash scripts/run_campaign.sh build/mferf_fuzz corpus/mferf 45
       - name: Structure-aware head-to-head (short)
-        run: bash scripts/compare_mutators.sh 100000 1 || true
+        run: bash scripts/compare_mutators.sh 50000 1 || true
       - name: Upload triage report
         if: always()
         uses: actions/upload-artifact@v4
