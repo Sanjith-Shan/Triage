@@ -1,0 +1,196 @@
+{
+  "bugs": [
+    {
+      "bucket": {
+        "major": "1b9c669617b6da96",
+        "minor": "e1508a1f858f3462"
+      },
+      "bug_class": "heap-use-after-free",
+      "bug_id": "BUG-0001",
+      "classification": {
+        "controlled_offset": null,
+        "controlled_value": null,
+        "exploitability": "likely-exploitable",
+        "rationale": "heap-use-after-free -> use-after-free; access=READ; null_deref=False. Heuristic hint only; not an exploit demonstration.",
+        "reachable_from_untrusted": true,
+        "severity": "use-after-free"
+      },
+      "crash_count": 572,
+      "minimized_size": 13,
+      "original_size": 56,
+      "representative": "campaigns/mferf/crashes/crash-00382b89ebdeb14cedb3e7ba86ce79ddac20b890",
+      "top_frame": "rec_recycle"
+    },
+    {
+      "bucket": {
+        "major": "e51d9be5c78d9b24",
+        "minor": "f79fee5c37bef6c0"
+      },
+      "bug_class": "SEGV",
+      "bug_id": "BUG-0002",
+      "classification": {
+        "controlled_offset": null,
+        "controlled_value": null,
+        "exploitability": "crash",
+        "rationale": "SEGV -> DoS; access=n/a; null_deref=False. Heuristic hint only; not an exploit demonstration.",
+        "reachable_from_untrusted": true,
+        "severity": "DoS"
+      },
+      "crash_count": 441,
+      "minimized_size": 49,
+      "original_size": 56,
+      "representative": "campaigns/mferf/crashes/crash-0079bc23e4718e3a9c80dba6d11cb9d0bc566972",
+      "top_frame": "rec_index"
+    },
+    {
+      "bucket": {
+        "major": "74c203f739edcd53",
+        "minor": "dd532a68884e256f"
+      },
+      "bug_class": "heap-buffer-overflow",
+      "bug_id": "BUG-0003",
+      "classification": {
+        "controlled_offset": null,
+        "controlled_value": null,
+        "exploitability": "likely-exploitable",
+        "rationale": "heap-buffer-overflow -> OOB-write; access=WRITE; null_deref=False. Heuristic hint only; not an exploit demonstration.",
+        "reachable_from_untrusted": true,
+        "severity": "OOB-write"
+      },
+      "crash_count": 126,
+      "minimized_size": 19,
+      "original_size": 52,
+      "representative": "campaigns/mferf/crashes/crash-007af4ee9d9d92538a0a983052d39bcfed2cac12",
+      "top_frame": "rec_blob"
+    },
+    {
+      "bucket": {
+        "major": "8449c5cbacec69f3",
+        "minor": "d1c9d455ef227976"
+      },
+      "bug_class": "stack-buffer-overflow",
+      "bug_id": "BUG-0004",
+      "classification": {
+        "controlled_offset": null,
+        "controlled_value": null,
+        "exploitability": "likely-exploitable",
+        "rationale": "stack-buffer-overflow -> OOB-write; access=WRITE; null_deref=False. Heuristic hint only; not an exploit demonstration.",
+        "reachable_from_untrusted": true,
+        "severity": "OOB-write"
+      },
+      "crash_count": 166,
+      "minimized_size": 45,
+      "original_size": 56,
+      "representative": "campaigns/mferf/crashes/crash-03a2aee96df1a2945b5e49e8e165ab02b8530612",
+      "top_frame": "rec_string"
+    },
+    {
+      "bucket": {
+        "major": "244a5d98e7005f0e",
+        "minor": "130c8665c45427ae"
+      },
+      "bug_class": "heap-buffer-overflow",
+      "bug_id": "BUG-0005",
+      "classification": {
+        "controlled_offset": null,
+        "controlled_value": null,
+        "exploitability": "crash",
+        "rationale": "heap-buffer-overflow -> OOB-read; access=READ; null_deref=False. Heuristic hint only; not an exploit demonstration.",
+        "reachable_from_untrusted": true,
+        "severity": "OOB-read"
+      },
+      "crash_count": 28,
+      "minimized_size": 16,
+      "original_size": 40,
+      "representative": "campaigns/mferf/crashes/crash-08ac30c9d119ccdcead95027ddcf5a18a1bbf38f",
+      "top_frame": "rec_index"
+    },
+    {
+      "bucket": {
+        "major": "aaf8cbd454d4b624",
+        "minor": "31874e3722bedbc4"
+      },
+      "bug_class": "SEGV",
+      "bug_id": "BUG-0006",
+      "classification": {
+        "controlled_offset": null,
+        "controlled_value": null,
+        "exploitability": "crash",
+        "rationale": "SEGV -> DoS; access=n/a; null_deref=False. Heuristic hint only; not an exploit demonstration.",
+        "reachable_from_untrusted": true,
+        "severity": "DoS"
+      },
+      "crash_count": 1,
+      "minimized_size": 30,
+      "original_size": 48,
+      "representative": "campaigns/mferf/crashes/crash-26ea3fc6b5186c789a88b4cf9642baf262f5523e",
+      "top_frame": "rec_index"
+    },
+    {
+      "bucket": {
+        "major": "8a2da8e133d2992d",
+        "minor": "8b59a50c75dc74d6"
+      },
+      "bug_class": "heap-buffer-overflow",
+      "bug_id": "BUG-0007",
+      "classification": {
+        "controlled_offset": null,
+        "controlled_value": null,
+        "exploitability": "likely-exploitable",
+        "rationale": "heap-buffer-overflow -> OOB-write; access=WRITE; null_deref=False. Heuristic hint only; not an exploit demonstration.",
+        "reachable_from_untrusted": true,
+        "severity": "OOB-write"
+      },
+      "crash_count": 1,
+      "minimized_size": 21,
+      "original_size": 52,
+      "representative": "campaigns/mferf/crashes/crash-309282d7f7d8b65a648fe8daaf9163f855238815",
+      "top_frame": "rec_blob"
+    },
+    {
+      "bucket": {
+        "major": "2d388ab2edf708ab",
+        "minor": "e0e14d6e9443aa68"
+      },
+      "bug_class": "heap-use-after-free",
+      "bug_id": "BUG-0008",
+      "classification": {
+        "controlled_offset": null,
+        "controlled_value": null,
+        "exploitability": "likely-exploitable",
+        "rationale": "heap-use-after-free -> use-after-free; access=READ; null_deref=False. Heuristic hint only; not an exploit demonstration.",
+        "reachable_from_untrusted": true,
+        "severity": "use-after-free"
+      },
+      "crash_count": 1,
+      "minimized_size": 20,
+      "original_size": 48,
+      "representative": "campaigns/mferf/crashes/crash-9be76b6f27dca62d556d81127cb897cce6b625fa",
+      "top_frame": "rec_recycle"
+    },
+    {
+      "bucket": {
+        "major": "7bfd15c0725fa825",
+        "minor": "21f42e73629f9a33"
+      },
+      "bug_class": "stack-buffer-overflow",
+      "bug_id": "BUG-0009",
+      "classification": {
+        "controlled_offset": null,
+        "controlled_value": null,
+        "exploitability": "likely-exploitable",
+        "rationale": "stack-buffer-overflow -> OOB-write; access=WRITE; null_deref=False. Heuristic hint only; not an exploit demonstration.",
+        "reachable_from_untrusted": true,
+        "severity": "OOB-write"
+      },
+      "crash_count": 1,
+      "minimized_size": 52,
+      "original_size": 52,
+      "representative": "campaigns/mferf/crashes/crash-c6a4d3f363871053349889b2ba55ed7afcafe17a",
+      "top_frame": "rec_string"
+    }
+  ],
+  "skipped": [],
+  "total_crashes": 1337,
+  "unique_bugs": 9
+}

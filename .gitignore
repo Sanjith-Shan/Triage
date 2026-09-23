@@ -19,3 +19,4 @@ __pycache__/
 /*.dSYM/
 /.cache/
 /compile_commands.json
+/results/**/*.log

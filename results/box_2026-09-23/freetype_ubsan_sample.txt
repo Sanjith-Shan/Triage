@@ -1,0 +1,4 @@
+/root/Triage/build-ft/_deps/freetype-src/src/base/ftobjs.c:5146:15: runtime error: call to function ps_hinter_init through pointer to incorrect function type 'int (*)(struct FT_ModuleRec_ *)'
+/root/Triage/build-ft/_deps/freetype-src/src/pshinter/pshmod.c:52: note: ps_hinter_init defined here
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /root/Triage/build-ft/_deps/freetype-src/src/base/ftobjs.c:5146:15 
+/root/Triage/build-ft/_deps/freetype-src/src/base/ftobjs.c:4605:17: runtime error: call to function gray_raster_new through pointer to incorrect function type 'int (*)(void *, struct FT_RasterRec_ **)'

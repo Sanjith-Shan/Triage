@@ -1,0 +1,60 @@
+  NEW_FUNC: 0x605fc2f01418 in destroy_size /root/Triage/build-ft/_deps/freetype-src/src/base/ftobjs.c:1250
+  NEW_FUNC: 0x605fc2f02d38 in ft_synthesize_vertical_metrics /root/Triage/build-ft/_deps/freetype-src/src/base/ftobjs.c:3143
+  NEW_FUNC: 0x605fc2f07c48 in FT_Request_Size /root/Triage/build-ft/_deps/freetype-src/src/base/ftobjs.c:3436
+  NEW_FUNC: 0x605fc2f08a48 in FT_Set_Pixel_Sizes /root/Triage/build-ft/_deps/freetype-src/src/base/ftobjs.c:3564
+  NEW_FUNC: 0x605fc2f0ad18 in find_unicode_charmap /root/Triage/build-ft/_deps/freetype-src/src/base/ftobjs.c:1371
+  NEW_FUNC: 0x605fc2f0e3a8 in ft_cmap_done_internal /root/Triage/build-ft/_deps/freetype-src/src/base/ftobjs.c:3805
+  NEW_FUNC: 0x605fc2f0e8b8 in FT_CMap_New /root/Triage/build-ft/_deps/freetype-src/src/base/ftobjs.c:3869
+  NEW_FUNC: 0x605fc2f3f728 in FT_List_Finalize /root/Triage/build-ft/_deps/freetype-src/src/base/ftutil.c:416
+  NEW_FUNC: 0x605fc3327c08 in FNT_Load_Glyph /root/Triage/build-ft/_deps/freetype-src/src/winfonts/winfnt.c:1004
+  NEW_FUNC: 0x605fc332a3b8 in FNT_Size_Request /root/Triage/build-ft/_deps/freetype-src/src/winfonts/winfnt.c:964
+  NEW_FUNC: 0x605fc332c468 in fnt_cmap_init /root/Triage/build-ft/_deps/freetype-src/src/winfonts/winfnt.c:629
+#810900: cov: 6650 ft: 11145 corp: 996 exec/s: 1730 oom/timeout/crash: 0/0/0 time: 200s job: 26 dft_time: 0
+#874981: cov: 6671 ft: 11302 corp: 1030 exec/s: 2288 oom/timeout/crash: 0/0/0 time: 215s job: 27 dft_time: 0
+  NEW_FUNC: 0x605fc2fa0538 in cff_parse_private_dict /root/Triage/build-ft/_deps/freetype-src/src/cff/cffparse.c:827
+  NEW_FUNC: 0x605fc2fa4db8 in cff_parse_real /root/Triage/build-ft/_deps/freetype-src/src/cff/cffparse.c:251
+  NEW_FUNC: 0x605fc2fa6d48 in do_fixed /root/Triage/build-ft/_deps/freetype-src/src/cff/cffparse.c:563
+#924302: cov: 6739 ft: 12148 corp: 1086 exec/s: 1700 oom/timeout/crash: 0/0/0 time: 229s job: 28 dft_time: 0
+  NEW_FUNC: 0x605fc2f9fe98 in cff_parse_font_bbox /root/Triage/build-ft/_deps/freetype-src/src/cff/cffparse.c:797
+#975706: cov: 6774 ft: 12333 corp: 1110 exec/s: 1713 oom/timeout/crash: 0/0/0 time: 246s job: 29 dft_time: 0
+#1016686: cov: 6781 ft: 12384 corp: 1127 exec/s: 1321 oom/timeout/crash: 0/0/0 time: 261s job: 30 dft_time: 0
+#1058192: cov: 6783 ft: 12445 corp: 1144 exec/s: 1297 oom/timeout/crash: 0/0/0 time: 278s job: 31 dft_time: 0
+  NEW_FUNC: 0x605fc3052b48 in PS_Conv_ToFixed /root/Triage/build-ft/_deps/freetype-src/src/psaux/psconv.c:198
+  NEW_FUNC: 0x605fc3053e38 in PS_Conv_ToInt /root/Triage/build-ft/_deps/freetype-src/src/psaux/psconv.c:164
+  NEW_FUNC: 0x605fc3054168 in PS_Conv_Strtol /root/Triage/build-ft/_deps/freetype-src/src/psaux/psconv.c:86
+  NEW_FUNC: 0x605fc305c038 in ps_tofixedarray /root/Triage/build-ft/_deps/freetype-src/src/psaux/psobjs.c:830
+#1112073: cov: 6837 ft: 12677 corp: 1155 exec/s: 1632 oom/timeout/crash: 0/0/0 time: 295s job: 32 dft_time: 0
+#1168089: cov: 6839 ft: 12695 corp: 1169 exec/s: 1647 oom/timeout/crash: 0/0/0 time: 313s job: 33 dft_time: 0
+#1213265: cov: 6907 ft: 12804 corp: 1182 exec/s: 1290 oom/timeout/crash: 0/0/0 time: 330s job: 34 dft_time: 0
+#1265241: cov: 6931 ft: 12868 corp: 1196 exec/s: 1443 oom/timeout/crash: 0/0/0 time: 349s job: 35 dft_time: 0
+#1322023: cov: 6933 ft: 12882 corp: 1205 exec/s: 1534 oom/timeout/crash: 0/0/0 time: 367s job: 36 dft_time: 0
+#1390295: cov: 6936 ft: 12897 corp: 1216 exec/s: 1796 oom/timeout/crash: 0/0/0 time: 388s job: 37 dft_time: 0
+  NEW_FUNC: 0x605fc2ed9838 in FT_RoundFix /root/Triage/build-ft/_deps/freetype-src/src/base/ftcalc.c:88
+#1441817: cov: 6948 ft: 12931 corp: 1224 exec/s: 1321 oom/timeout/crash: 0/0/0 time: 407s job: 38 dft_time: 0
+#1491834: cov: 6950 ft: 13019 corp: 1233 exec/s: 1250 oom/timeout/crash: 0/0/0 time: 428s job: 39 dft_time: 0
+#1553786: cov: 6951 ft: 13043 corp: 1241 exec/s: 1511 oom/timeout/crash: 0/0/0 time: 448s job: 40 dft_time: 0
+#1622659: cov: 6954 ft: 13086 corp: 1249 exec/s: 1639 oom/timeout/crash: 0/0/0 time: 470s job: 41 dft_time: 0
+#1673080: cov: 6959 ft: 13114 corp: 1265 exec/s: 1172 oom/timeout/crash: 0/0/0 time: 492s job: 42 dft_time: 0
+#1745621: cov: 6970 ft: 13142 corp: 1273 exec/s: 1648 oom/timeout/crash: 0/0/0 time: 515s job: 43 dft_time: 0
+#1802582: cov: 6970 ft: 13317 corp: 1284 exec/s: 1265 oom/timeout/crash: 0/0/0 time: 537s job: 44 dft_time: 0
+#1862741: cov: 6970 ft: 13346 corp: 1290 exec/s: 1307 oom/timeout/crash: 0/0/0 time: 561s job: 45 dft_time: 0
+#1953558: cov: 6975 ft: 13391 corp: 1298 exec/s: 1932 oom/timeout/crash: 0/0/0 time: 584s job: 46 dft_time: 0
+  NEW_FUNC: 0x605fc302a218 in ps_parser_to_bytes /root/Triage/build-ft/_deps/freetype-src/src/psaux/psobjs.c:1385
+#2023126: cov: 7032 ft: 13477 corp: 1310 exec/s: 1449 oom/timeout/crash: 0/0/0 time: 610s job: 47 dft_time: 0
+  NEW_FUNC: 0x605fc2ed9e08 in FT_DivFix /root/Triage/build-ft/_deps/freetype-src/src/base/ftcalc.c:254
+#2095637: cov: 7051 ft: 13543 corp: 1327 exec/s: 1479 oom/timeout/crash: 0/0/0 time: 634s job: 48 dft_time: 0
+#2182537: cov: 7058 ft: 13587 corp: 1344 exec/s: 1738 oom/timeout/crash: 0/0/0 time: 660s job: 49 dft_time: 0
+#2259394: cov: 7062 ft: 13615 corp: 1360 exec/s: 1507 oom/timeout/crash: 0/0/0 time: 685s job: 50 dft_time: 0
+  NEW_FUNC: 0x605fc2f9e4f8 in cff_parse_font_matrix /root/Triage/build-ft/_deps/freetype-src/src/cff/cffparse.c:670
+#2340130: cov: 7079 ft: 13665 corp: 1372 exec/s: 1552 oom/timeout/crash: 0/0/0 time: 713s job: 51 dft_time: 0
+#2421167: cov: 7084 ft: 13693 corp: 1381 exec/s: 1529 oom/timeout/crash: 0/0/0 time: 739s job: 52 dft_time: 0
+#2485079: cov: 7084 ft: 13712 corp: 1385 exec/s: 1183 oom/timeout/crash: 0/0/0 time: 767s job: 53 dft_time: 0
+#2578127: cov: 7084 ft: 13720 corp: 1388 exec/s: 1691 oom/timeout/crash: 0/0/0 time: 794s job: 54 dft_time: 0
+#2658483: cov: 7086 ft: 13728 corp: 1395 exec/s: 1434 oom/timeout/crash: 0/0/0 time: 824s job: 55 dft_time: 0
+#2737015: cov: 7092 ft: 13773 corp: 1402 exec/s: 1377 oom/timeout/crash: 0/0/0 time: 852s job: 56 dft_time: 0
+#2857794: cov: 7111 ft: 13822 corp: 1414 exec/s: 2082 oom/timeout/crash: 0/0/0 time: 882s job: 57 dft_time: 0
+#2961291: cov: 7112 ft: 13878 corp: 1432 exec/s: 1754 oom/timeout/crash: 0/0/0 time: 911s job: 58 dft_time: 0
+  NEW_FUNC: 0x605fc2f034e8 in FT_Select_Metrics /root/Triage/build-ft/_deps/freetype-src/src/base/ftobjs.c:3203
+  NEW_FUNC: 0x605fc332aca8 in FNT_Size_Select /root/Triage/build-ft/_deps/freetype-src/src/winfonts/winfnt.c:943
+INFO: fuzzed for 911 seconds, wrapping up soon
+INFO: exiting: 0 time: 911s

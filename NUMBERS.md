@@ -64,21 +64,23 @@ on the gap**: under ASan on Linux the structure-aware advantage is larger, becau
 become detectable and they live behind exactly the length/type fields the structure model
 targets.
 
-## Campaign numbers — pending (Linux + libFuzzer)
+## Campaign numbers — measured on Linux (RunPod CPU box, 2026-09-23)
 
-These need the ASan runtime and libFuzzer, which do not run on the dev Mac (see
-`docs/BUILD.md`). They run in CI (`.github/workflows/ci.yml`, `campaign` job) and on the Linux
-campaign box. Commands recorded so they are reproducible:
+Real libFuzzer + ASan/UBSan on a RunPod CPU pod (Ubuntu 24.04, clang 18.1.3, 2 vCPU,
+`-fork=2`). Full write-up and reproduce commands: `results/box_2026-09-23/SUMMARY.md`.
 
-- **Distinct bugs from raw crash count** on MFERF under real libFuzzer, e.g. "N crashes → 5
-  distinct bugs" — `scripts/run_campaign.sh build/mferf_fuzz corpus/mferf 60` then
-  `python -m triage campaigns/mferf_fuzz/crashes --binary build/mferf_fuzz --minimize`.
-- **Reached-edge coverage** per target (proves the fuzzer entered the parser) — libFuzzer
-  `-print_coverage=1` / `llvm-cov`.
-- **Structure-aware vs naive under libFuzzer** — real edge coverage and time-to-first-crash,
-  the coverage-guided version of the head-to-head above.
-- **External-target findings** (libcoap / CBOR / JOSE) and the **FreeType CVE-2025-27363
-  seeded rediscovery** — `docs/EXTERNAL_TARGETS.md`.
+- **MFERF end-to-end: 1,337 saved crashes → 9 distinct bugs**, each classified and minimized
+  (heap-UAF 13 B, stack-overflow 45 B, heap-overflow 19 B, …). Table in
+  `results/box_2026-09-23/mferf_triage.md`. This is the "a crash count is not a finding"
+  headline, measured.
+- **FreeType 2.13.0 (seeded target): cov 7,112 edges, corpus 1,432, 0 memory crashes** in a
+  900 s window; **2 real UBSan function-pointer-type findings** (`ftobjs.c:5146`, `:4605`).
+  No CVE-2025-27363 rediscovery in this window (honest negative — needs a targeted seed
+  corpus or a longer campaign). Coverage went **2 → 7,112** after the CMake fix that
+  instruments the fetched library, not just the driver.
+- **libcoap (fresh target): cov 739 edges, 0 crashes, 0 sanitizer hits** in 600 s — honest
+  negative; the harness hits `coap_pdu_parse` only, not the DTLS/OSCORE/hostname CVE paths.
 
-None of the pending numbers may reach a resume until measured and recorded here with the
-machine and target version.
+Still open (not yet run): the structure-aware-vs-naive head-to-head under *libFuzzer* edge
+coverage (the standalone-engine version is measured above), the CBOR/JOSE targets, and a
+longer or seed-targeted FreeType campaign to rediscover CVE-2025-27363.
