@@ -43,20 +43,30 @@ else()
 endif()
 message(STATUS "Triage engine: ${_engine} (sanitizers: ${TRIAGE_SANITIZE})")
 
+separate_arguments(_san UNIX_COMMAND "-fsanitize=${TRIAGE_SANITIZE}")
+
+# Instrument the WHOLE build — including libraries pulled in via FetchContent —
+# so libFuzzer gets coverage feedback from inside the target library, not just
+# the driver. Without this the external targets fuzz blind (coverage stays ~2)
+# and never reach deep code. `fuzzer-no-link` adds SanitizerCoverage to every TU
+# but leaves main() to the fuzz-target link step. This is the OSS-Fuzz pattern.
+add_compile_options(-g -O1 ${_san})
+if(_engine STREQUAL "libfuzzer")
+  add_compile_options(-fsanitize=fuzzer-no-link)
+endif()
+
 # triage_add_target(NAME SOURCES <files...>)
-# Builds a fuzz target executable under the selected engine + sanitizers.
+# Builds a fuzz target executable under the selected engine + sanitizers. Compile
+# instrumentation comes from the global options above; this only settles main()
+# and the link.
 function(triage_add_target NAME)
   cmake_parse_arguments(A "" "" "SOURCES" ${ARGN})
-  set(_srcs ${A_SOURCES})
-  add_executable(${NAME} ${_srcs})
+  add_executable(${NAME} ${A_SOURCES})
   target_include_directories(${NAME} PRIVATE "${CMAKE_SOURCE_DIR}/include")
-  separate_arguments(_san UNIX_COMMAND "-fsanitize=${TRIAGE_SANITIZE}")
   if(_engine STREQUAL "libfuzzer")
-    target_compile_options(${NAME} PRIVATE -fsanitize=fuzzer ${_san} -g -O1)
     target_link_options(${NAME} PRIVATE -fsanitize=fuzzer ${_san})
   else()
     target_sources(${NAME} PRIVATE "${CMAKE_SOURCE_DIR}/targets/standalone_main.c")
-    target_compile_options(${NAME} PRIVATE ${_san} -g -O1)
     target_link_options(${NAME} PRIVATE ${_san})
   endif()
 endfunction()
